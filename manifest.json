@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "Better Timer",
-  "version": "3.0",
-  "description": "A clean, dark timer with sound, notifications, and toolbar display.",
+  "version": "3.4",
+  "description": "A dark, clean timer with naval blue bar, sound, and notifications.",
   "permissions": ["storage", "notifications", "alarms", "offscreen"],
   "background": {
     "service_worker": "background.js"
@@ -15,5 +15,11 @@
     "16": "wall-clock.png",
     "48": "wall-clock.png",
     "128": "wall-clock.png"
-  }
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["ding.mp3", "offscreen.js"],
+      "matches": ["<all_urls>"]
+    }
+  ]
 }
