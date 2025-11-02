@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<body>
+<script>
+chrome.runtime.onMessage.addListener((msg) => {
+  if (msg.type === "play-ding") {
+    const audio = new Audio(chrome.runtime.getURL("ding.mp3"));
+    audio.play().catch(err => console.warn("Audio play error:", err));
+  }
+});
+</script>
+</body>
+</html>

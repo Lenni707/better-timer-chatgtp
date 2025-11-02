@@ -1,20 +1,19 @@
 {
-    "manifest_version": 3,
-    "name": "Better Timer",
-    "version": "1.0",
-    "description": "A clean, simple timer with sound and notifications.",
-    "permissions": ["storage", "notifications", "alarms"],
-    "background": {
-      "service_worker": "background.js"
-    },
-    "action": {
-      "default_popup": "popup.html",
-      "default_icon": "wall-clock.png"
-    },
-    "icons": {
-      "16": "wall-clock.png",
-      "48": "wall-clock.png",
-      "128": "wall-clock.png"
-    }
+  "manifest_version": 3,
+  "name": "Better Timer",
+  "version": "3.0",
+  "description": "A clean, dark timer with sound, notifications, and toolbar display.",
+  "permissions": ["storage", "notifications", "alarms", "offscreen"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": "wall-clock.png"
+  },
+  "icons": {
+    "16": "wall-clock.png",
+    "48": "wall-clock.png",
+    "128": "wall-clock.png"
   }
-  
+}

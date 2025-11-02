@@ -45,7 +45,7 @@ async function updateUI() {
     remaining = stored || 0;
   }
 
-  display.textContent = fmt(remaining || 0);
+  display.textContent = fmt(remaining);
   if (total > 0) {
     const offset = CIRC * (1 - remaining / total);
     progress.style.strokeDashoffset = offset;
@@ -57,22 +57,21 @@ async function updateUI() {
 setInterval(updateUI, 1000);
 updateUI();
 
-/* --- NEW: instantly update display as user types --- */
+// Live update display as user types
 input.addEventListener("input", async () => {
   const seconds = parseTime(input.value);
   display.textContent = fmt(seconds);
   await chrome.storage.local.set({ remaining: seconds, total: seconds });
-  progress.style.strokeDashoffset = seconds > 0 ? CIRC * (1 - seconds / seconds) : CIRC;
 });
 
-/* --- Start / Pause --- */
+// Start/Pause toggle
 startBtn.onclick = async () => {
   const { running } = await chrome.storage.local.get("running");
   if (!running) {
     let seconds = parseTime(input.value);
     const stored = await chrome.storage.local.get("remaining");
     if (stored.remaining > 0) seconds = stored.remaining;
-    if (seconds <= 0) return; // nothing to start
+    if (seconds <= 0) return;
 
     const endTime = Date.now() + seconds * 1000;
     await chrome.storage.local.set({
@@ -92,7 +91,7 @@ startBtn.onclick = async () => {
   updateUI();
 };
 
-/* --- Reset --- */
+// Reset
 resetBtn.onclick = async () => {
   await chrome.storage.local.set({ running: false, remaining: 0, endTime: null, total: 0 });
   input.value = "";
@@ -101,7 +100,7 @@ resetBtn.onclick = async () => {
   startBtn.textContent = "▶";
 };
 
-/* --- Add time (works while running) --- */
+// Add time buttons
 addBtns.forEach((btn) => {
   btn.onclick = async () => {
     const add = parseInt(btn.dataset.add);
